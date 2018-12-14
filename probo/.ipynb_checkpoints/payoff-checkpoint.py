@@ -20,6 +20,31 @@ class Payoff(object, metaclass=abc.ABCMeta):
         pass
 
     
+class ExoticPayoff(Payoff):
+    def __init__(self, expiry, strike, payoff):
+        self.__expiry = expiry
+        self.__strike = strike
+        self.__payoff = payoff
+        
+    @property
+    def expiry(self):
+        return self.__expiry
+
+    @expiry.setter
+    def expiry(self, new_expiry):
+        self.__expiry = new_expiry
+    
+    @property 
+    def strike(self):
+        return self.__strike
+    
+    @strike.setter
+    def strike(self, new_strike):
+        self.__strike = new_strike
+
+    def payoff(self, spot):
+        return self.__payoff(self, spot)
+    
 class VanillaPayoff(Payoff):
     def __init__(self, expiry, strike, payoff):
         self.__expiry = expiry
